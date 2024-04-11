@@ -3,7 +3,7 @@ POST http://localhost:8080/events
 Content-Type: application/json
 
 {
-  "title": "my event 3",
+  "title": "my event 4",
   "details": "my event fake description",
   "maximumAttendees": 4
 }
