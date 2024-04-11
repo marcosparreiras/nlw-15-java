@@ -10,3 +10,6 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8080/events/d05067e8-4b1b-48ab-8d44-ad9e12350815
+
+###
+GET http://localhost:8080/events/d05067e8-4b1b-48ab-8d44-ad9e12350815/attendees
