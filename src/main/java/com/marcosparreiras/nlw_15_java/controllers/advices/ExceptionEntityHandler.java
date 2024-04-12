@@ -1,6 +1,7 @@
 package com.marcosparreiras.nlw_15_java.controllers.advices;
 
 import com.marcosparreiras.nlw_15_java.controllers.dtos.ResponseErrorDTO;
+import com.marcosparreiras.nlw_15_java.exceptions.AttendeeNotFoundException;
 import com.marcosparreiras.nlw_15_java.exceptions.DomainException;
 import com.marcosparreiras.nlw_15_java.exceptions.EventNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,10 @@ public class ExceptionEntityHandler {
   public ResponseEntity<ResponseErrorDTO> handleDomainExceptions(
     DomainException e
   ) {
-    if (e.getClass().equals(EventNotFoundException.class)) {
+    if (
+      e.getClass().equals(EventNotFoundException.class) ||
+      e.getClass().equals(AttendeeNotFoundException.class)
+    ) {
       return ResponseEntity
         .status(HttpStatus.NOT_FOUND)
         .body(new ResponseErrorDTO(e.getMessage()));
