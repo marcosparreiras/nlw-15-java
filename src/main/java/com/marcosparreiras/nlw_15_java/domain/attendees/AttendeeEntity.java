@@ -11,14 +11,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "attendees")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AttendeeEntity {
 
   @Id
@@ -37,5 +40,6 @@ public class AttendeeEntity {
   private EventEntity event;
 
   @Column(name = "created_at")
+  @CreationTimestamp
   private LocalDateTime createdAt;
 }

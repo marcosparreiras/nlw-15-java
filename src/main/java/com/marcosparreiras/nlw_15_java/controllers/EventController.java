@@ -3,6 +3,9 @@ package com.marcosparreiras.nlw_15_java.controllers;
 import com.marcosparreiras.nlw_15_java.useCases.CreateEvent.CreateEventRequestDTO;
 import com.marcosparreiras.nlw_15_java.useCases.CreateEvent.CreateEventResponseDTO;
 import com.marcosparreiras.nlw_15_java.useCases.CreateEvent.CreateEventUseCase;
+import com.marcosparreiras.nlw_15_java.useCases.CreateRegister.CreateRegisterRequestDTO;
+import com.marcosparreiras.nlw_15_java.useCases.CreateRegister.CreateRegisterResponseDTO;
+import com.marcosparreiras.nlw_15_java.useCases.CreateRegister.CreateRegisterUseCase;
 import com.marcosparreiras.nlw_15_java.useCases.FetchEventAttendees.FetchEventAttendeesRequestDTO;
 import com.marcosparreiras.nlw_15_java.useCases.FetchEventAttendees.FetchEventAttendeesResponseDTO;
 import com.marcosparreiras.nlw_15_java.useCases.FetchEventAttendees.FetchEventAttendeesUseCase;
@@ -32,6 +35,9 @@ public class EventController {
   @Autowired
   private FetchEventAttendeesUseCase fetchEventAttendeesUseCase;
 
+  @Autowired
+  private CreateRegisterUseCase createRegisterUseCase;
+
   @PostMapping("")
   public ResponseEntity<CreateEventResponseDTO> createEvent(
     @RequestBody CreateEventRequestDTO requestDTO
@@ -57,5 +63,19 @@ public class EventController {
     var request = new FetchEventAttendeesRequestDTO(eventId);
     var response = this.fetchEventAttendeesUseCase.execute(request);
     return ResponseEntity.ok().body(response);
+  }
+
+  @PostMapping("/{eventId}/attendees")
+  public ResponseEntity<CreateRegisterResponseDTO> createRegister(
+    @PathVariable String eventId,
+    @RequestBody CreateRegisterRequestDTO body
+  ) throws Exception {
+    var request = new CreateRegisterRequestDTO(
+      body.name(),
+      body.email(),
+      eventId
+    );
+    var response = this.createRegisterUseCase.execute(request);
+    return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 }

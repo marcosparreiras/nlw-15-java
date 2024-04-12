@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "check_ins")
@@ -26,6 +27,7 @@ public class CheckInEntity {
   private Integer id;
 
   @Column(name = "created_at")
+  @CreationTimestamp
   private LocalDateTime createdAt;
 
   @OneToOne
