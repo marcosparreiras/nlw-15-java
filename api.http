@@ -22,3 +22,6 @@ Content-Type: application/json
   "name": "john doe 7",
   "email": "johndoe7@example.com"
 }
+
+###
+GET http://localhost:8080/attendees/2080570a-38dd-48f8-93cf-ad99edb16af3
