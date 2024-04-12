@@ -4,6 +4,7 @@ import com.marcosparreiras.nlw_15_java.domain.attendees.AttendeeEntity;
 import com.marcosparreiras.nlw_15_java.exceptions.AttendeeAlreadyExistsException;
 import com.marcosparreiras.nlw_15_java.exceptions.DomainException;
 import com.marcosparreiras.nlw_15_java.exceptions.EventNotFoundException;
+import com.marcosparreiras.nlw_15_java.exceptions.EventSoldOutException;
 import com.marcosparreiras.nlw_15_java.repositories.AttendeeRepository;
 import com.marcosparreiras.nlw_15_java.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,13 @@ public class CreateRegisterUseCase {
 
     if (attendeeAlreadyExists.isPresent()) {
       throw new AttendeeAlreadyExistsException(requestDTO.email());
+    }
+
+    var attendeesList =
+      this.attendeeRepository.findByEventId(requestDTO.eventId());
+
+    if (attendeesList.size() >= event.get().getMaximumAttendees()) {
+      throw new EventSoldOutException(event.get().getId());
     }
 
     var attendee =

@@ -19,6 +19,6 @@ POST http://localhost:8080/events/d05067e8-4b1b-48ab-8d44-ad9e12350815/attendees
 Content-Type: application/json
 
 {
-  "name": "john doe 5",
-  "email": "johndoe5@example.com"
+  "name": "john doe 7",
+  "email": "johndoe7@example.com"
 }
